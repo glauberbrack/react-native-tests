@@ -1,14 +1,12 @@
-/**
- * @format
- */
-
-import 'react-native';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React from 'react';
+import { render } from '@testing-library/react-native';
 import App from '../App';
 
-// Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
+describe('render successfully', () => {
+  it('renders App screen', () => {
+    const { toJSON } = render(<App />);
 
-it('renders correctly', () => {
-  renderer.create(<App />);
+    expect(toJSON()).toMatchSnapshot();
+  });
 });
