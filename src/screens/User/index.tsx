@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { Text, SafeAreaView, TouchableOpacity, StyleSheet } from 'react-native';
 
-const Home = () => {
-  const [text, setText] = useState<string>('Hello, there!');
+const User = () => {
+  const [name, setName] = useState<string>('');
 
-  const onButton = () => setText('How you doing?');
+  const getUser = async () => {
+    const response = await axios('https://api.github.com/users/glauberbrack');
+    const data = await response.data;
+    setName(data.name);
+  };
+
+  const onButton = async () => await getUser();
 
   return (
     <SafeAreaView style={styles.wrapper}>
-      <Text style={styles.headline}>{text}</Text>
+      <Text style={styles.headline}>{name}</Text>
       <TouchableOpacity onPress={onButton} style={styles.button}>
-        <Text style={styles.buttonText}>Let's go!</Text>
+        <Text style={styles.buttonText}>Get username</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -43,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default User;
