@@ -9,8 +9,8 @@ const MainStack = createStackNavigator();
 export default function Routes() {
   return (
     <MainStack.Navigator screenOptions={{ headerShown: false }}>
-      <MainStack.Screen name="User" component={User} />
       <MainStack.Screen name="Home" component={Home} />
+      <MainStack.Screen name="User" component={User} />
     </MainStack.Navigator>
   );
 }
