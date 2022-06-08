@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 describe('Home Screen Success', () => {
   // This will run every time we run the tests
   beforeAll(async () => {
@@ -9,23 +11,24 @@ describe('Home Screen Success', () => {
     await device.reloadReactNative();
   });
 
+  // This will get our first component on reload
   it('renders components successfully', async () => {
     const letsGoText = await element(by.text('Hello, there!'));
 
-    expect(letsGoText).toBeVisible();
+    await expect(letsGoText).toBeVisible();
   });
 
-  // it('should have welcome screen', async () => {
-  //   await expect(element(by.id('welcome'))).toBeVisible();
-  // });
+  // This will trigger an action
+  it('change text to How you doing?', async () => {
+    const homeButton = await element(by.text("Let's go!"));
 
-  // it('should show hello screen after tap', async () => {
-  //   await element(by.id('hello_button')).tap();
-  //   await expect(element(by.text('Hello!!!'))).toBeVisible();
-  // });
+    // The action will be click in the button
+    await homeButton.tap();
 
-  // it('should show world screen after tap', async () => {
-  //   await element(by.id('world_button')).tap();
-  //   await expect(element(by.text('World!!!'))).toBeVisible();
-  // });
+    const letsGoText = await element(by.text('Hello, there!'));
+    const howYouDoingText = await element(by.text("Let's go!"));
+
+    await expect(letsGoText).not.toBeVisible();
+    await expect(howYouDoingText).toBeVisible();
+  });
 });
